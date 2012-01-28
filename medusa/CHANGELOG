@@ -1,0 +1,21 @@
+* Wed Jan 11 2012 david <david@david> 0.8.7
+- Pequeños cambios
+
+* Wed Jan 11 2012 david <david@david> 0.8.6
+- Desactivada opción de quitar pestañas porque no esta funcional y causa que el editor se cierre, perdiendo así todos los datos
+
+* Wed Jan 11 2012 david <david@david> 0.8.5
+- Añadida opción "ir a la linea"
+- Correpción de bugs
+
+* Wed Jan 11 2012 david <david@david> 0.8.4
+- Corregida opción "nuevo", muestra pestañas con editor de textos
+- Otros pequeños cambios
+
+* Tue Jan 10 2012 david <david@david> 0.8.3
+- Cambios gráficos
+
+* Tue Jan 10 2012 david <david@david> 0.8.2
+- Lanzamiento inicial
+- Pequeño editor de texto, con varias funciones
+
