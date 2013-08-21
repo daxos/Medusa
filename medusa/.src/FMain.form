@@ -1,0 +1,276 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,104,71)
+  Background = &HEBEBEB&
+  Drop = True
+  Icon = Picture["textseditor3.png"]
+  Arrangement = Arrange.Vertical
+  Spacing = True
+  Margin = True
+  { Archivo Menu
+    Text = ("Archivo")
+    { nuevo2 Menu
+      Text = ("Nuevo")
+      Picture = Picture["imagenes/document-new.svg"]
+    }
+    { abrir Menu
+      Text = ("Abrir...")
+      Picture = Picture["imagenes/document-open.png"]
+    }
+    { Menu2 Menu
+    }
+    { Menu6 Menu
+      Text = ("Guardar")
+      Picture = Picture["imagenes/document-save.png"]
+    }
+    { guardar Menu
+      Text = ("Guardar como...")
+      Picture = Picture["imagenes/document-save.png"]
+    }
+    { Menu4 Menu
+    }
+    { Menu3 Menu
+      Text = ("Salir")
+      Picture = Picture["imagenes/system-shutdown.svg"]
+    }
+  }
+  { edicion Menu
+    Text = ("Edición")
+    { rehacer Menu
+      Text = ("Rehacer")
+      Picture = Picture["imagenes/edit-redo.png"]
+      Shortcut = "Ctrl+Y"
+    }
+    { deshacer Menu
+      Text = ("Deshacer")
+      Picture = Picture["imagenes/edit-undo.png"]
+      Shortcut = "Ctrl+Z"
+    }
+    { Menu7 Menu
+    }
+    { cortar2 Menu
+      Text = ("Cortar")
+      Picture = Picture["imagenes/edit-cut.png"]
+      Shortcut = "Ctrl+X"
+    }
+    { copiar Menu
+      Text = ("Copiar")
+      Picture = Picture["imagenes/edit-copy.png"]
+      Shortcut = "Ctrl+C"
+    }
+    { pegar Menu
+      Text = ("Pegar")
+      Picture = Picture["imagenes/edit-paste.png"]
+      Shortcut = "Ctrl+V"
+    }
+    { borrar Menu
+      Text = ("Borrar")
+      Picture = Picture["imagenes/window-close.png"]
+    }
+  }
+  { insertar Menu
+    Text = ("Insertar")
+    { hora Menu
+      Text = ("Hora actual")
+      Picture = Picture["imagenes/clock.svg"]
+    }
+    { fecha Menu
+      Text = ("Fecha actual")
+      Picture = Picture["imagenes/calendar.svg"]
+    }
+  }
+  { herramientas Menu
+    Text = ("Herramientas")
+    { calculadora Menu
+      Text = ("Calculadora")
+      Picture = Picture["imagenes/accessories-calculator.png"]
+    }
+    { lectura Menu
+      Text = ("Lectura por voz")
+      Picture = Picture["imagenes/tools-check-spelling.png"]
+    }
+  }
+  { buscar2 Menu
+    Text = ("Buscar")
+    { Menu5 Menu
+      Text = ("Buscar y Reemplazar palabra")
+      Picture = Picture["imagenes/edit-find.png"]
+    }
+  }
+  { Menu1 Menu
+    Text = ("Ayuda")
+    { about Menu
+      Text = ("Acerca de...")
+      Picture = Picture["imagenes/empathy.svg"]
+    }
+  }
+  { TabStrip1 TabStrip
+    MoveScaled(0,0,84,57)
+    Drop = True
+    Expand = True
+    Arrangement = Arrange.Vertical
+    Index = 0
+    Text = ("Documento 1")
+    { TextArea1 TextArea editores
+      Name = "TextArea1"
+      MoveScaled(2,0,83,45)
+      Drop = True
+      Expand = True
+      Wrap = True
+      Border = False
+    }
+    Index = 0
+  }
+  { PictureBox3 PictureBox
+    MoveScaled(1,10,83,59)
+    Background = &HEEECE6&
+    Expand = True
+    Picture = Picture["pensil_256.png"]
+    Alignment = Align.Center
+  }
+  { Timer1 #Timer
+    #MoveScaled(93,36)
+  }
+  { Expander1 Expander
+    MoveScaled(-1,49,103,19)
+    Background = &H1E1E1E&
+    Text = ("Opciones")
+    Animated = True
+    { busqueda TextBox
+      MoveScaled(5,2,37,4)
+      Font = Font["Bitstream Charter"]
+    }
+    { Buscar Button
+      MoveScaled(42,2,9,4)
+      Font = Font["Bitstream Charter"]
+      Text = ("Buscar")
+    }
+    { PictureBox1 PictureBox
+      MoveScaled(1,2,4,4)
+      Picture = Picture["imagenes/edit-find.png"]
+      Stretch = True
+    }
+    { lineabox TextBox
+      MoveScaled(6,7,9,4)
+      Font = Font["Bitstream Charter"]
+      Text = ("0")
+    }
+    { botonir Button
+      MoveScaled(15,7,12,4)
+      Font = Font["Bitstream Charter"]
+      Text = ("Ir a la línea")
+    }
+    { PictureBox2 PictureBox
+      MoveScaled(1,7,4,4)
+      Picture = Picture["imagenes/edit-undo.png"]
+    }
+    { siguientelinea Button
+      MoveScaled(27,7,10,4)
+      Font = Font["Bitstream Charter"]
+      Text = ("Siguiente")
+    }
+    { ocultar Button
+      MoveScaled(78,7,16,4)
+      Visible = False
+      Font = Font["Bitstream Charter"]
+      Text = ("Cerrar")
+    }
+    { TextBoxReemplaza TextBox
+      MoveScaled(54,2,27,4)
+      Font = Font["Bitstream Charter"]
+    }
+    { ButtonReemplazar Button
+      MoveScaled(81,2,13,4)
+      Font = Font["Bitstream Charter"]
+      Text = ("Reemplazar")
+    }
+    { Panel2 Panel
+      MoveScaled(-1,0,103,22)
+      Background = &H1E1E1E&
+      Expand = True
+      { nuevo ToolButton
+        MoveScaled(2,2,8,8)
+        Background = Color.Background
+        ToolTip = ("Nuevo")
+        Picture = Picture["imagenes/document-new.svg"]
+      }
+      { abrir2 ToolButton
+        MoveScaled(10,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Abrir")
+        Picture = Picture["imagenes/document-open.png"]
+      }
+      { guadarcomo ToolButton
+        MoveScaled(18,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Guardar Como")
+        Picture = Picture["imagenes/document-save.png"]
+      }
+      { copia2 ToolButton
+        MoveScaled(27,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Copiar")
+        Picture = Picture["imagenes/edit-copy.png"]
+      }
+      { cortar ToolButton
+        MoveScaled(35,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Cortar")
+        Picture = Picture["imagenes/edit-cut.png"]
+      }
+      { pegar2 ToolButton
+        MoveScaled(43,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Pegar")
+        Picture = Picture["imagenes/edit-paste.png"]
+      }
+      { seleccionar ToolButton
+        MoveScaled(68,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Seleccionar todo")
+        Picture = Picture["edit-select-all.png"]
+      }
+      { deshacer2 ToolButton
+        MoveScaled(51,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Deshacer")
+        Picture = Picture["imagenes/edit-undo.png"]
+      }
+      { rehacer2 ToolButton
+        MoveScaled(59,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Rehacer")
+        Picture = Picture["imagenes/edit-redo.png"]
+      }
+      { disminuir ToolButton
+        MoveScaled(77,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Zoom -")
+        Picture = Picture["imagenes/zoom-out.png"]
+      }
+      { SpinBox1 SpinBox
+        MoveScaled(78,6,6,4)
+        Visible = False
+      }
+      { aumentar ToolButton
+        MoveScaled(85,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Zoom +")
+        Picture = Picture["imagenes/zoom-in.png"]
+      }
+      { closef ToolButton
+        MoveScaled(92,2,8,8)
+        Background = &HF0F0F0&
+        ToolTip = ("Cerrar")
+        Picture = Picture["imagenes/window-close.png"]
+      }
+      { dimelahora Label
+        MoveScaled(37,11,25,3)
+        Visible = False
+        Foreground = &HFFFFFF&
+        Alignment = Align.Center
+      }
+    }
+  }
+}

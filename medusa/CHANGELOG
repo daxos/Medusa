@@ -1,0 +1,42 @@
+* Sat Apr 28 2012 david <david@david> 0.8.13
+- Eliminación de opción de mandar correo por conflicto
+- Cambios gráficos
+
+* Thu Mar 01 2012 david <david@david> 0.8.12
+- Retoques gráficos
+- Cuando se manda el correo aparece un mensaje avisando del mismo
+
+* Thu Mar 01 2012 david <david@david> 0.8.11
+- Añadida la opción de mandar correo
+
+* Sat Feb 18 2012 david <david@david> 0.8.10
+- Corregido el bug de cerrar pestaña
+
+* Sat Feb 18 2012 david <david@david> 0.8.9
+- Corrección error que cerraba el formulario si le dabas a cancelar
+
+* Thu Jan 26 2012 david <david@david> 0.8.8
+- Opción de busqueda funcionando 100 %
+- Editor de texto totalmente funcional
+
+* Wed Jan 11 2012 david <david@david> 0.8.7
+- Pequeños cambios
+
+* Wed Jan 11 2012 david <david@david> 0.8.6
+- Desactivada opción de quitar pestañas porque no esta funcional y causa que el editor se cierre, perdiendo así todos los datos
+
+* Wed Jan 11 2012 david <david@david> 0.8.5
+- Añadida opción "ir a la linea"
+- Correpción de bugs
+
+* Wed Jan 11 2012 david <david@david> 0.8.4
+- Corregida opción "nuevo", muestra pestañas con editor de textos
+- Otros pequeños cambios
+
+* Tue Jan 10 2012 david <david@david> 0.8.3
+- Cambios gráficos
+
+* Tue Jan 10 2012 david <david@david> 0.8.2
+- Lanzamiento inicial
+- Pequeño editor de texto, con varias funciones
+

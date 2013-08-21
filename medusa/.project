@@ -1,0 +1,34 @@
+# Gambas Project File 3.0
+# Compiled with Gambas 3.4.2
+Title=Editor de texto Medusa
+Startup=FMain
+Icon=icono-editor.png
+Version=0.9.10
+Component=gb.image
+Component=gb.qt4
+Component=gb.form
+Component=gb.settings
+Component=gb.form.mdi
+Component=gb.qt4.ext
+Description="Editor de texto:\n\nMedusa, un sencillo editor de texto para Dax OS"
+TabSize=2
+Translate=1
+Language=es_AR
+ControlPublic=1
+ModulePublic=1
+Maintainer=david
+Vendor=DaxOS
+Address=davidmf@daxos.org
+Url=http://www.daxos.org/
+License=General Public Licence
+Prefix=1
+PackageName=daxos-textseditor3-0.9.10
+Packager=1
+Systems=debian,ubuntu
+Menus=debian:"Applications/Office"
+Categories=debian:"Office"
+Groups=debian:"editors"
+ExtraDependencies=debian:"\t\t"
+Menus=ubuntu:"Applications/Office"
+Categories=ubuntu:"Office"
+Groups=ubuntu:"text"

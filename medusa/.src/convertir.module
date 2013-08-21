@@ -1,0 +1,190 @@
+' Gambas module file
+
+' Uso:
+' ConvierteNumero_a_letras(value as float, moneda as string, mCent as string)
+' Moneda y mCent van en singular. El resultado es siempre en MAYUSCULAS!.
+
+' By: Marcos D. Henning
+' Basado en: http://jsbsan.wordpress.com/2009/04/26/redondeo-round/
+' Gracias a: Julio
+' Diego González Arango
+
+'Ejemplos: PESOS
+'ConvierteNumero_a_letras(0.01, "PESO", "CENTAVO") == > UN CENTAVO
+'ConvierteNumero_a_letras(0.99, "PESO", "CENTAVO") == > NOVENTA Y NUEVE CENTAVOS
+'ConvierteNumero_a_letras(1.10, "DOLAR", "CENTAVO") == > UN DOLAR CON DIEZ CENTAVOS
+'ConvierteNumero_a_letras(110, "DOLAR", "CENTAVO") == > CIENTO DIEZ DOLARES
+'‘ConvierteNumero_a_letras(121.55, "DOLAR", "CENTAVO") == > CIENTO VEINTIUN DOLARES CON CINCUENTA Y CINCO CENTAVOS
+
+' Licencia:
+'/**
+'‘ * NumerosLetras IS free software; you can redistribute it AND / OR modify
+'* it under the terms OF the GNU General PUBLIC License AS published by
+'‘ * the Free Software Foundation; either version 2 OF the License, OR
+'‘* (at your option)any later version.
+'‘ *
+'‘ * Alba IS distributed IN the hope that it will be useful,
+'‘ * but WITHOUT ANY WARRANTY; without even the implied warranty OF
+'‘ * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.See the
+'‘ * GNU General PUBLIC License FOR more details.
+'‘ *
+'‘ * You should have received a COPY OF the GNU General PUBLIC License
+'‘ * along WITH Alba; IF NOT, WRITE TO the Free Software
+'‘ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110 – 1301 USA
+'‘ * /
+
+
+Public Function ConvierteNumero_a_letras(valor As Float, moneda As String, mCent As String) As String
+Dim i As Float
+Dim r As Float
+Dim hastacoma As String
+Dim texto As String
+Dim monedaPlural As String
+Dim mCentPlural As String
+moneda = Upper$(moneda)
+mcent = Upper$(mcent)
+monedaPlural = palabraPlural(moneda)
+mCentPlural = palabraPlural(mCent)
+i = Int(valor)
+r = (valor - i) * 100
+If i = 0 Then
+    If r = 1 Then
+      Return Num2Text(r) & " " & mCent & " "
+    Endif
+    If r > 1 Then
+      Return Num2Text(r) & " " & mCentPlural & " "
+    Endif
+  Else
+If r = 0 Then
+  If i = 1 Then
+  Return Num2Text(i) & " " & moneda
+  Endif
+  If i > 1 Then
+  Return Num2Text(i) & " " & monedaPlural
+  Endif
+  Else
+  r = Round(r, -1) 'para tener números exactos redondeo los decimales en caso que el valor venga con más de 2 decimales.
+  r = Int(r)
+  If i = 1 Then
+    If r = 1 Then Return Num2Text(i) & " " & moneda & " con " & Num2Text(r) & " " & mCent
+    If r > 1 Then Return Num2Text(i) & " " & moneda & " con " & Num2Text(r) & " " & mCentPlural
+  Else
+  If r = 1 Then Return Num2Text(i) & " " & monedaPlural & " con " & Num2Text(r) & " " & mCent
+  If r > 1 Then Return Num2Text(i) & " " & monedaPlural & " con " & Num2Text(r) & " " & mCentPlural
+  Endif
+  Endif
+Endif
+End
+'--------------------------------
+'poner plurales en castellano
+'--------------------------------
+Public Function palabraPlural(texto As String) As String
+Dim vocal As String
+Dim ultimaLetra As String
+vocal = "AEIOU"
+ultimaLetra = Right(texto, 1)
+If (InStr(vocal, ultimaLetra)) Then
+Return texto & "s"
+Else
+Return texto & "es"
+Endif
+End
+'--------------------------------
+'escribir el numero
+'--------------------------------
+Public Function Num2Text(value As Long) As String
+Dim texto As String
+If value = 0 Then Return "cero"
+If value = 1 Then Return "un"
+If value = 2 Then Return "dos"
+If value = 3 Then Return "tres"
+If value = 4 Then Return "cuatro"
+If value = 5 Then Return "cinco"
+If value = 6 Then Return "seis"
+If value = 7 Then Return "siete"
+If value = 8 Then Return "ocho"
+If value = 9 Then Return "nueve"
+If value = 10 Then Return "diez"
+If value = 11 Then Return "once"
+If value = 12 Then Return "doce"
+If value = 13 Then Return "trece"
+If value = 14 Then Return "catorce"
+If value = 15 Then Return "quince"
+If value >= 16 And value < 20 Then
+texto = "dieci" & Num2Text(value - 10)
+Return texto
+Endif
+
+If value = 20 Then Return "veinte"
+If value >= 21 And value <= 29 Then
+texto = "veinti" & Num2Text(value - 20)
+Return texto
+Endif
+If value = 30 Then Return "treinta"
+If value = 40 Then Return "cuarenta"
+If value = 50 Then Return "cincuenta"
+If value = 60 Then Return "sesenta"
+If value = 70 Then Return "setenta"
+If value = 80 Then Return "ochenta"
+If value = 90 Then Return "noventa"
+If value < 100 Then
+texto = Num2Text(Int(value / 10) * 10) & " y " & Num2Text(value Mod 10)
+Return texto
+Endif
+If value = 100 Then Return "cien"
+If value < 200 Then
+texto = "ciento " & Num2Text(value - 100)
+Return texto
+Endif
+
+If value = 200 Or value = 300 Or value = 400 Or value = 600 Or value = 800 Then
+texto = Num2Text(Int(value / 100)) & "cientos"
+Return texto
+Endif
+
+If value = 500 Then Return "quinientos"
+If value = 700 Then Return "setecientos"
+If value = 900 Then Return "novecientos"
+
+If value < 1000 Then
+texto = Num2Text(Int(value / 100) * 100) & " " & Num2Text(value Mod 100)
+Return texto
+Endif
+
+If value = 1000 Then
+Return "mil"
+Endif
+
+If value < 2000 Then
+Texto = "mil " & Num2Text(value Mod 1000)
+Return texto
+Endif
+
+If value < 1000000 Then
+texto = Num2Text(Int(value / 1000)) & " mil"
+If (value Mod 1000) Then texto = texto & " " & Num2Text(value Mod 1000)
+Return texto
+Endif
+
+If value = 1000000 Then texto = "un millón"
+
+If value < 2000000 Then
+Texto = "un millón " & Num2Text(value Mod 1000000)
+Return texto
+Endif
+
+If value < 1000000000000.0 Then
+texto = Num2Text(Int(value / 1000000)) & " millones "
+If (value - Int(value / 1000000) * 1000000) Then Texto = Texto & " " & Num2Text(value - Int(value / 1000000) * 1000000)
+Return texto
+Endif
+
+If value = 1000000000000.0 Then Return "un billón"
+If value >= 2000000000000 Then
+Texto = "cantidad demasiado grande"
+Return texto
+Endif
+
+End Function
+' Gambas module file
+

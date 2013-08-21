@@ -1,0 +1,499 @@
+' Gambas class file
+
+Private $sPath As String
+Private $bModify As Boolean
+
+Public Sub Form_Open()
+  'muevo el panel para que se pueda ver...
+
+  Panel2.x = 0
+  Panel2.y = 0
+  TabStrip1.Hide
+  Expander1.Show
+  TabStrip1.Picture = Picture["icon:/16/text"]
+  TextArea1.SetFocus
+  TextArea1_Cursor
+  Expander1.Hidden = True
+  TextArea1 = TabStrip1.Children[0]
+  Me.Center
+  timer1.Enabled = True
+  
+End
+
+Public Sub TextArea1_Cursor()
+  
+  SpinBox1.Value = TextArea1.Font.Size
+  
+End
+
+Public Sub SpinBox1_Change()
+  
+  TextArea1.Font.Size = Last.Value
+  TextArea1.SetFocus
+  
+End
+
+Public Sub form_Close()
+  
+  If Message.Warning("¿Seguro que desea cerrar?" & "\n" & "Todo cambio no guardado se perdera",
+      "Cerrar", "Cancelar") = 1 Then
+    Me.close
+  Else
+    Stop Event
+    
+  Endif
+  
+End
+
+Public Sub nuevo_Click()
+  
+  Dim txtTemp As TextArea
+  
+  If TabStrip1.Visible = False Then
+    TabStrip1.Show
+    PictureBox3.Hide
+  Else
+    nuevaHoja()  
+  Endif
+  
+End
+
+Public Sub closef_Click()
+  
+  Dim TextArea1 As TextArea
+  
+  TextArea1 = TabStrip1.Children[0]
+  
+  If TabStrip1.Count > 1 Then
+    
+    TextArea1.Reparent(FMain)
+    TextArea1.Delete
+    TabStrip1.Current.Delete
+  Else
+    Me.close
+    
+  Endif
+  
+End
+
+Public Sub guardar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  Save(True)
+  
+End
+
+Private Sub SetPath(sPath As String)
+  
+  $sPath = sPath
+  'RefreshTitle
+  
+End
+
+Public Sub Save(Optional bSaveAs As Boolean)
+  
+  If bSaveAs Or Not $sPath Then
+    If Dialog.SaveFile() Then Return
+    SetPath(Dialog.Path)
+  Endif
+  
+  File.Save($sPath, TextArea1.Text)
+  
+End
+
+Public Sub nuevaHoja()
+  
+  Dim TextArea1 As TextArea
+  
+  If TabStrip1.Visible = False Then
+    TabStrip1.Show
+    PictureBox3.Hide
+  Else
+    
+    TabStrip1.Count += 1
+    
+    TabStrip1.Text = "Documento " & Str(TabStrip1.Index + 1) & " no guardado"
+    
+    TextArea1 = New TextArea(TabStrip1) As "editores"
+    
+    TabStrip1.Children[0].Name = "TextArea1" & CStr(TabStrip1.Index + 1)
+    
+    TextArea1.expand = True
+    
+  Endif
+  
+End
+
+Public Sub abrir_Click()
+  
+  Dim contenidoArchivo As String
+  
+  Dim a As Integer
+  Dim arrCad As New String[]
+  Dim txtTemp As TextArea
+  Dim c As String
+  Dim ruta As String
+  
+  TabStrip1.Show
+  PictureBox3.Hide
+  
+  txtTemp = TabStrip1.Children[0]
+  
+  Dialog.Title = "Seleccione un archivo"
+  
+  Dialog.Filter = ["*.txt", "Texto", "*", "Todos Los Archivos", " *.sh", " ShellScript ", "*.html", " HTML "]
+  
+  If Not Dialog.OpenFile() Then
+    
+    ruta = Dialog.Path
+    
+    '' arrCad = Split(File.Load(ruta), "\n") '¿para que hacer esto, el split? , si lo que te interesa es al cadena completa
+    contenidoArchivo = File.Load(ruta) 'aqui guardo todo el contenido del archivos 
+  End If
+  
+  If txtTemp.Text <> "" Then
+    nuevaHoja()
+  End If
+  
+  txtTemp = TabStrip1.Children[0]
+  TabStrip1.Text = ruta
+  
+  'paso todo el contenido del archivo que he leido a la textbox
+  txtTemp.text = contenidoArchivo
+  'codigo eliminado...
+  '  For Each c In arrCad
+  '   Print a
+  '   a = a + 1
+  '   txtTemp.Text &= c & "\n"
+  ' Next
+  
+End
+
+Public Sub borrar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.Clear
+  TabStrip1.Hide
+  PictureBox3.Show
+  
+End
+
+Public Sub copiar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.Copy
+  
+End
+
+Public Sub pegar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.Paste
+  
+End
+
+Public Sub salir_Click()
+  
+  Me.closef
+  
+End
+
+Public Sub abrir2_Click()
+  
+  abrir_Click()
+  
+End
+
+Public Sub guadarcomo_Click()
+  
+  Dim destino As String ' cadena donde se guarda la ruta y nombre del archivo
+  
+  TextArea1 = TabStrip1.Children[0]
+  
+  Save(True)
+  
+End
+
+Public Sub copia2_Click()
+  
+  copiar_Click
+  
+End
+
+Public Sub cortar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.Cut
+  
+End
+
+Public Sub pegar2_Click()
+  
+  pegar_Click()
+  'Mejor: no repetir codigo, el codigo que hace lo mismo no se debe de copiar...
+  'TextArea1 = TabStrip1.Children[0]
+  'TextArea1.paste
+  
+End
+
+Public Sub cortar2_Click()
+  
+  cortar_Click()
+  
+  'TextArea1 = TabStrip1.Children[0]
+  'TextArea1.cut
+  
+End
+
+Public Sub seleccionar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.SelectAll
+  
+End
+
+Public Sub rehacer_Click()
+  
+  TextArea1.redo
+  
+End
+
+Public Sub deshacer_Click()
+  
+  TextArea1.undo
+  
+End
+
+Public Sub deshacer2_Click()
+  
+  deshacer_Click()
+  'Mejor: no repetir codigo, el codigo que hace lo mismo no se debe de copiar...
+  'TextArea1 = TabStrip1.Children[0]
+  'TextArea1.undo
+  
+End
+
+Public Sub rehacer2_Click()
+  
+  rehacer_Click()
+  'Mejor: no repetir codigo, el codigo que hace lo mismo no se debe de copiar...
+  'TextArea1 = TabStrip1.Children[0]
+  'TextArea1.redo
+  
+End
+
+Public Sub aumentar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  SpinBox1.value += 1
+  
+End
+
+Public Sub disminuir_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  SpinBox1.Value -= 1
+  
+End
+
+Public Sub Buscar_Click()
+  
+  Dim IndexRecherche As Integer
+  'muevo el panel para que se pueda ver...
+  Panel2.x = 0
+  Panel2.y = 0
+  TextArea1 = TabStrip1.Children[0]
+  ' [GB2:TEXT] IndexRecherche = InStr(TextArea1.Text, busqueda.Text, gb.Text)
+  IndexRecherche = InStr(TextArea1.Text, busqueda.Text, gb.IgnoreCase)
+  TextArea1.Select(IndexRecherche - 1, Len(busqueda.Text))
+  
+End
+
+Public Sub ButtonReemplazar_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.text = Replace$(TextArea1.text, busqueda.text, TextBoxReemplaza.text)
+  
+End
+
+Public Sub Menu3_Click()
+  
+  Me.closef
+  
+End
+
+Public Sub about_Click()
+  
+  Form2.show
+  
+End
+
+Public Sub nuevo2_Click()
+  
+  nuevo_Click()
+  'no repetir el cogido
+  'TextArea1 = TabStrip1.Children[0]
+  'nuevaHoja()
+  
+End
+
+Public Sub botonir_Click()
+  
+  Dim numero As String
+  
+  numero = lineabox.text
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.line = numero
+  
+End
+
+Public Sub siguientelinea_Click()
+  
+  Dim numero As Integer
+  
+  numero = lineabox.text
+  lineabox.text = lineabox.text + 1
+  TextArea1 = TabStrip1.Children[0]
+  TextArea1.Line = numero + 1
+  
+End
+
+Public Function extraeNombre(nombre As String) As String
+  
+  Dim letra As String
+  Dim a As Integer
+  Dim nombreextraido As String
+  
+  nombre = Replace$(nombre, "file://", "")
+  
+  For a = 1 To Len(nombre)
+    letra = Mid$(nombre, a, 1)
+    If letra = "\r" Then
+      Return nombreextraido
+    Else
+      nombreextraido &= letra 
+    Endif
+  Next
+  
+End
+
+Public Sub form_Drop()
+  
+  Dim a As String
+  Dim texto As File
+  Dim txttemp As TextArea
+  Dim nombrefichero As String
+  Dim contenidoArchivo As String
+  
+  'añadir una archivo desde el navegador....
+  nuevaHoja()
+  txtTemp = TabStrip1.Children[0]
+  'para texto
+  nombrefichero = extraeNombre(Drag.Paste())
+  contenidoArchivo = File.Load(nombrefichero) 'aqui guardo todo el contenido del archivos 
+  
+  TabStrip1.Text = nombrefichero
+  txtTemp.text = contenidoArchivo
+  
+  'codigo eliminado...
+  '¿para que servia?
+  '.. 
+  a = RTrim(a)
+  
+  a = Replace$(a, "%20", " ")
+  a = Replace$(a, "%C3%A1", "á")
+  a = Replace$(a, "%C3%A9", "é")
+  a = Replace$(a, "%C3%AD", "í")
+  a = Replace$(a, "%C3%B3", "ó")
+  a = Replace$(a, "%C3%BA", "ú")
+  a = Replace$(a, "%C3%81", "Á")
+  a = Replace$(a, "%C3%89", "É")
+  a = Replace$(a, "%C3%8D", "Í")
+  a = Replace$(a, "%C3%93", "Ó")
+  a = Replace$(a, "%C3%9A", "Ú")
+  a = Replace$(a, "%C3%B1", "ñ")
+  a = Replace$(a, "%C3%91", "Ñ")
+  a = Replace$(a, "file://", "")
+  a = Replace$(a, "%5B", "[")
+  a = Replace$(a, "%5D", "]")
+  
+  ' txtTemp.text = a
+  'texto = Open a For Read
+  
+End
+
+Public Sub Menu5_Click()
+  'muevo el panel para que se pueda ver...
+
+  Panel2.x = 0
+  Panel2.y = 100
+  ' Panel2.hide
+  ocultar.show
+  
+End
+
+Public Sub ocultar_Click()
+  
+  '  Panel2.Show
+  ocultar.Hide
+  Panel2.x = 0
+  Panel2.y = 0
+  
+End
+
+Public Sub Menu6_Click()
+  
+  TextArea1 = TabStrip1.Children[0]
+  save
+  
+End
+
+Public Sub PictureBox3_MouseDown()
+  
+End
+
+Public Sub Expander1_Show()
+  
+End
+
+
+
+Public Sub calculadora_Click()
+
+f_calc.Show
+
+End
+
+Public Sub Timer1_Timer()
+
+timer1.Delay = 1000
+dimelahora.Text = Format$(Now, "d/mmmm/yyyy hh:nn:ss AM/PM")
+
+End
+
+Public Sub hora_Click()
+
+TextArea1 = TabStrip1.Children[0]
+TextArea1.Insert(Chr$(10))
+TextArea1.Insert(Format$(Now, "hh:nn:ss"))
+ TextArea1.Insert(Chr$(10))
+ TextArea1.SetFocus
+
+End
+
+Public Sub fecha_Click()
+
+TextArea1 = TabStrip1.Children[0]
+TextArea1.Insert(Chr$(10))
+TextArea1.Insert(Format$(Now, "dd"))
+ TextArea1.Insert(Chr$(10))
+ TextArea1.SetFocus
+
+End
+
+Public Sub lectura_Click()
+
+  TextArea1 = TabStrip1.Children[0]
+  Exec ["espeak", "-ves", "-s" & Str$(f_calc.Slider1.value), TextArea1.text]
+
+End

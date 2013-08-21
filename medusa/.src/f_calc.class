@@ -1,0 +1,167 @@
+' Gambas class file
+
+Private $sPath As String
+Private $bModify As Boolean
+
+
+
+'///////////////Convertir numeros a letras (y escucharlos)/////////////////////////////
+
+Public Sub Button1_Click()
+'Message.Info("Requiere tener instalado espeak para poder leer los textos. Puede instalarse desde el terminal escribiendo: sudo apt-get install espeak")
+
+ValueBoxNumero.SetFocus
+
+
+End
+
+Public Sub ToolButtonSalir_Click()
+
+ Me.Close
+
+End
+
+Public Sub ToolButtonEscuchar_Click()
+  Exec ["espeak", "-ves", "-s" & Str$(Slider1.value), TextArea3.text]
+End
+
+Public Sub ToolButtonGrabar_Click()
+  Exec ["espeak", "-ves", "-s" & Str$(Slider1.value), TextArea3.text, "-w", "prueba.wav"]
+End
+
+Public Sub ToolButtonBorrar_Click()
+FMain.TextArea3.text = ""
+End
+
+
+Public Sub ToolButtonConvertir_Click()
+TextArea3.text = convertir.ConvierteNumero_a_letras(ValueBoxNumero.Value, ComboBoxMoneda.Text, ComboBoxCentimo.text)
+ ToolButtonEscuchar.SetFocus
+End
+
+Public Sub ValueBoxNumero_KeyPress()
+  If Key.code = Key.enter Or Key.code = Key.return Then
+  ToolButtonConvertir.SetFocus
+  Endif
+End
+
+Public Sub Slider1_Change()
+  LabelVelocidad.text = "Velocidad de lectura: " & Str$(Slider1.value)
+End
+
+Public Sub ToolButtonPegarPortapapeles_Click()
+TextArea3.text = Clipboard.Paste()
+End
+
+
+Public Sub ToolButtonAyuda_Click()
+
+  Form2.Show
+
+End
+
+
+Public Sub ToolButtonCopiar_Click()
+
+Clipboard.copy(TextArea3.text)
+End
+
+
+Public Sub Timer1_Timer()
+timer1.Delay = 1000
+FMain.dimelahora.Text = Format$(Now, "d/mmmm/yyyy hh:nn:ss AM/PM")
+
+End
+
+'///////////////Calculadora/////////////////////////
+
+Public Sub sumar_Click()
+
+If TextBox1.Text = Null Or If TextBox2.Text = Null Then
+        TextBox3.Text = "¡Faltan los números!"
+        Else
+        TextBox3.Text = TextBox1.Text + TextBox2.Text
+         Label1.Font.size = 11
+        Label1.Text = "+"
+    End If
+End
+
+Public Sub restar_Click()
+
+If TextBox1.Text = Null Or If TextBox2.Text = Null Then
+        TextBox3.Text = "¡Faltan los números!"
+        Else
+        TextBox3.Text = TextBox1.Text - TextBox2.Text
+        Label1.Font.size = 11
+        Label1.Text = "-"
+    End If
+End
+
+
+Public Sub multiplicar_Click()
+
+ If TextBox1.Text = Null Or If TextBox2.Text = Null Then
+        TextBox3.Text = "¡Faltan los números!"
+        Else
+        TextBox3.Text = TextBox1.Text * TextBox2.Text
+        Label1.Font.size = 11
+        Label1.Text = "x"
+    End If
+End
+
+Public Sub dividir_Click()
+If TextBox1.Text = Null Or If TextBox2.Text = Null Then
+      TextBox3.Text = "¡Faltan los números!"
+Else 
+TextBox3.Text = TextBox1.Text / TextBox2.Text
+Label1.Font.size = 11
+        Label1.Text = "/"
+        Endif
+        Finally
+        Catch
+   Label1.Font.size = 9
+   Label1.text = "No puede dividir entre cero"
+   TextBox3.text = "ERROR"
+   TextBox2.text = ""
+   TextBox2.SetFocus
+End
+
+
+Public Sub elevar_Click()
+Dim potencia As Integer
+potencia = TextBox2.Text
+ If TextBox1.Text = Null Or If TextBox2.Text = Null Then
+        TextBox3.Text = "¡Faltan los números!"
+        Else
+        TextBox3.Text = TextBox1.Text ^ potencia
+        Label1.Font.size = 11
+        Label1.Text = "^"
+    End If
+End
+
+Public Sub clear_Click()
+  TextBox1.text = ""
+  TextBox2.text = ""
+  TextBox3.text = ""
+  Label1.Font.size = 11
+  Label1.Text = "Calculadora Básica"
+End
+
+Public Sub calcopy_Click()
+  Clipboard.copy(TextBox3.text)
+End
+
+'////////////Leer Texto/////////////////////
+
+Public Sub play_Click()
+ Exec ["espeak", "-ves", "-s" & Str$(Slider1.value), FMain.TextArea1.text]
+End
+
+
+Public Sub stop_Click()
+ FMain.TextArea1 = FMain.TabStrip1.Children[0]
+Shell "killall -SIGTERM espeak"
+End
+
+
+

@@ -1,0 +1,191 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,75,43)
+  Icon = Picture["icono-editor.png"]
+  { Panel1 Panel
+    MoveScaled(0,0,77,44)
+    Background = &HDFDFDF&
+    { ValueBoxNumero ValueBox
+      MoveScaled(44,1,21,3)
+      Font = Font["10"]
+    }
+    { ComboBoxCentimo ComboBox
+      MoveScaled(44,8,22,3)
+      Font = Font["10"]
+      ReadOnly = True
+      List = [("céntimo"), ("centavo")]
+      Text = ("céntimo")
+    }
+    { ToolButtonConvertir ToolButton
+      MoveScaled(2,4,30,4)
+      Font = Font["-1"]
+      Text = ("Convertir números a texto")
+      Picture = Picture["icon:/24/exec"]
+      Border = True
+    }
+    { ToolButtonEscuchar ToolButton
+      MoveScaled(2,22,23,5)
+      Font = Font["10"]
+      Text = ("Escuchar el texto")
+      Picture = Picture["imagenes/media-playback-start.svg"]
+      Border = True
+    }
+    { Slider1 Slider
+      MoveScaled(27,24,20,2)
+      MinValue = 120
+      MaxValue = 200
+      Value = 160
+    }
+    { ToolButtonGrabar ToolButton
+      MoveScaled(3,28,57,3)
+      Font = Font["10"]
+      Text = ("Grabar en un archivo .wav (/home/usuario/prueba.wav)")
+      Picture = Picture["imagenes/document-save.png"]
+      Border = True
+    }
+    { ToolButtonAyuda ToolButton
+      MoveScaled(63,21,11,3)
+      Font = Font["10"]
+      ToolTip = ("Ayuda del convertidor de números a letras")
+      Text = (" Ayuda")
+      Picture = Picture["icon:/small/help"]
+      Border = True
+    }
+    { ToolButtonSalir ToolButton
+      MoveScaled(63,24,11,3)
+      Font = Font["10"]
+      Text = ("Cerrar")
+      Picture = Picture["imagenes/window-close.png"]
+      Border = True
+    }
+    { Label2 Label
+      MoveScaled(2,1,41,3)
+      Font = Font["10"]
+      Text = ("Introduce el numero (maximo 2 decimales):")
+    }
+    { LabelVelocidad Label
+      MoveScaled(23,22,29,2)
+      Font = Font["10"]
+      Text = ("Velocidad de lectura:")
+      Alignment = Align.Center
+    }
+    { Label3 Label
+      MoveScaled(34,6,8.7143,2.5714)
+      Font = Font["10"]
+      Text = ("Moneda:")
+    }
+    { Label6 Label
+      MoveScaled(34,9,8.7143,2.5714)
+      Font = Font["10"]
+      Text = ("Céntimo:")
+    }
+    { ToolButtonPegarPortapapeles ToolButton
+      MoveScaled(2,8,30,4)
+      Font = Font["10"]
+      Text = ("Pegar desde Portapapeles")
+      Picture = Picture["imagenes/edit-paste.png"]
+      Border = True
+    }
+    { ToolButtonBorrar ToolButton
+      MoveScaled(52,21,11,3)
+      Font = Font["10"]
+      ToolTip = ("Limpiar área de resultado")
+      Text = ("Borrar")
+      Picture = Picture["icon:/small/clear"]
+      Border = True
+    }
+    { ToolButtonCopiar ToolButton
+      MoveScaled(52,24,11,3)
+      Font = Font["10"]
+      ToolTip = ("Copiar al portapapeles")
+      Text = ("Copiar")
+      Picture = Picture["imagenes/edit-copy.png"]
+      Border = True
+    }
+    { TextArea3 TextArea
+      MoveScaled(2,13,58,7)
+    }
+    { ComboBoxMoneda ComboBox
+      MoveScaled(44,5,22,3)
+      ReadOnly = True
+      List = [("Bolívar"), ("Dolar"), ("Euro"), ("Sol"), ("Peso")]
+      Text = ("Bolívar")
+    }
+    { PanelC Panel
+      MoveScaled(2,32,59,10)
+      Background = &H1F1F1F&
+      Border = Border.Sunken
+      { TextBox1 TextBox
+        MoveScaled(12,1,12,4)
+        ToolTip = ("Introduzca el valor Nº1")
+      }
+      { TextBox2 TextBox
+        MoveScaled(12,5,12,4)
+        ToolTip = ("Introduzca el valor Nº2")
+      }
+      { TextBox3 TextBox
+        MoveScaled(37,5,17,4)
+        ToolTip = ("Aquí se muestra el resultado")
+      }
+      { sumar Button
+        MoveScaled(24,1,4,4)
+        Mouse = Mouse.Pointing
+        ToolTip = ("sumar")
+        Text = ("+")
+      }
+      { restar Button
+        MoveScaled(28,1,4,4)
+        Mouse = Mouse.Pointing
+        ToolTip = ("restar")
+        Text = ("-")
+      }
+      { multiplicar Button
+        MoveScaled(24,5,4,4)
+        Mouse = Mouse.Pointing
+        ToolTip = ("multiplicar")
+        Text = ("x")
+      }
+      { dividir Button
+        MoveScaled(28,5,4,4)
+        Mouse = Mouse.Pointing
+        ToolTip = ("dividir")
+        Text = ("÷")
+      }
+      { clear Button
+        MoveScaled(32,5,4,4)
+        Mouse = Mouse.Pointing
+        ToolTip = ("limpiar")
+        Text = ("c")
+      }
+      { elevar Button
+        MoveScaled(32,1,4,4)
+        ToolTip = ("elevar")
+        Text = ("^")
+      }
+      { calcopy ToolButton
+        MoveScaled(54,5,4,4)
+        Font = Font["10"]
+        ToolTip = ("Copiar al portapapeles")
+        Picture = Picture["imagenes/edit-copy.png"]
+        Border = True
+      }
+      { Label1 Label
+        MoveScaled(37,1,21,4)
+        Font = Font["Bold"]
+        Foreground = &HFFFFFF&
+        Text = ("Calculadora Básica")
+        Alignment = Align.Center
+      }
+      { PictureBox4 PictureBox
+        MoveScaled(2,1,8,8)
+        ToolTip = ("Calculadora básica")
+        Picture = Picture["imagenes/accessories-calculator.svg"]
+        Stretch = True
+      }
+    }
+    { Timer1 #Timer
+      #MoveScaled(68,31)
+    }
+  }
+}

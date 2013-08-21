@@ -1,0 +1,22 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,61,22)
+  Icon = Picture["icono-editor.png"]
+  Resizable = False
+  { PictureBox1 PictureBox
+    MoveScaled(4,2,9,11)
+    Picture = Picture["icono-editor.png"]
+  }
+  { Label1 Label
+    MoveScaled(15,3,52,4)
+    Font = Font["+4"]
+    Text = ("Editor de Textos Medusa")
+  }
+  { TextArea1 TextArea
+    MoveScaled(15,9,43,11)
+    Background = &HFFFFFF&
+    Text = ("Sencillo editor de texto para la \ndistribución Dax OS, escrito en\ngambas3 y bajo la licencia GPL")
+    ReadOnly = True
+  }
+}
